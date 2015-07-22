@@ -12,7 +12,7 @@ public class PitchContextFactory {
     public static final String VOLJUME = "batchVolume";
     public static final String UNITS = "units";
     public static final String OG =        "OriginalGravity";
-    public static final String CELL_COUNT = "cellCount";
+    public static final String CELL_OVERBUILD = "cellOverbuild";
     public static final String INITIAL_CELL_COUNT = "intialCellCount";
     Properties properties;
     public PitchContextFactory(Properties properties) {
@@ -53,10 +53,10 @@ public class PitchContextFactory {
         double og = Double.parseDouble(OGStr);
         wort.setOriginalGravity(og);
         String unitStr = properties.getProperty(UNITS);
-        VolumeUnits units = VolumeUnits.getVolumeUnits(unitStr);
+        VolumeUnits units = VolumeUnits.valueOf(unitStr);
         wort.setUnits(units);
-        String cellCountStr = properties.getProperty(CELL_COUNT);
+        String cellCountStr = properties.getProperty(CELL_OVERBUILD);
         int cellCount = Integer.parseInt(cellCountStr);
-        wort.setCellCount(cellCount);
+        wort.setCellOverbuild(cellCount);
     }
 }

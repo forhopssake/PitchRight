@@ -1,13 +1,18 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="#0099cc"
     android:orientation="vertical"
     tools:context=".PitchRight"
-    android:id="@+id/frameLayout"
-    android:paddingTop="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:id="@+id/frameLayout">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0099cc"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
@@ -17,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:keepScreenOn="true"
-        android:id="@+id/mainLayout">
+        android:id="@+id/targetPitchRateRLayout">
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,7 +31,9 @@
             android:text="@string/wort_targetPitchRate"
             android:layout_alignParentTop="true"
             android:gravity="center"
-            android:id="@+id/textView" />
+            android:onClick="showHelp"
+            android:tag="@string/help_wort_targetPitchRate"
+            android:id="@+id/targetPitchRateTextView" />
 
         <Spinner
             android:id="@+id/targetPitchRateSpinner"
@@ -40,19 +47,123 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:inputType="number"
             android:text="0.0"
             android:layout_alignParentTop="true"
             android:gravity="center"
             android:id="@+id/pitchRate" />
 
+    </LinearLayout>
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"></LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:keepScreenOn="true"
+            android:id="@+id/targetPRLayout">
 
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/wort_batchVolume"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:enabled="true"
+                android:onClick="showHelp"
+                android:tag="@string/help_wort_batchVolume"
+                android:id="@+id/batchVolumeTextView" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:inputType="numberDecimal"
+                android:text="0.0"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:id="@+id/batchVolumeEditText" />
+
+            <Spinner
+                android:id="@+id/batchVolumeSpinner"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:keepScreenOn="true"
+            android:id="@+id/originalGravityLayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/wort_originalGravity"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:enabled="true"
+                android:onClick="showHelp"
+                android:tag="@string/help_wort_originalGravity"
+                android:id="@+id/originalGravityTextView" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:inputType="numberDecimal"
+                android:text="0.0"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:id="@+id/originalGravityEditText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:keepScreenOn="true"
+            android:background="#ffff7216">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/wort_cellsRequired"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:enabled="true"
+                android:onClick="showHelp"
+                android:tag="@string/help_wort_cellsRequired" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:inputType="numberDecimal"
+                android:text="0"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:enabled="false"
+                android:id="@+id/requiredCellsEditText" />
+        </LinearLayout>
+
+        <!-- This FrameLayout insets its children based on system windows using
+             android:fitsSystemWindows. -->
 
 </LinearLayout>
+</FrameLayout>

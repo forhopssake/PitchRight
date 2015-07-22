@@ -11,11 +11,5 @@ public enum VolumeUnits {
         this.name = name;
     }
 
-    public static VolumeUnits getVolumeUnits(String name) {
-        if (name == null || !name.equals("GALLONS")){
-            return LITRES;
-        } else {
-            return GALLONS;
-        }
-    }
+
 }

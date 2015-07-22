@@ -3,178 +3,62 @@ package com.forhopssake.pitchright;
 import com.forhopssake.pitchright.context.PitchContext;
 import com.forhopssake.pitchright.context.PitchContextFactory;
 import com.forhopssake.pitchright.context.TargetType;
+import com.forhopssake.pitchright.context.VolumeUnits;
+import com.forhopssake.pitchright.context.Wort;
 import com.forhopssake.pitchright.res.PropertyLoader;
-import com.forhopssake.pitchright.util.SystemUiHider;
+import com.forhopssake.pitchright.util.Calculator;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.MotionEvent;
+import android.text.Editable;
+import android.text.Html;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.Properties;
 
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- *
- * @see SystemUiHider
- */
-public class PitchRight extends Activity implements AdapterView.OnItemSelectedListener{
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
+public class PitchRight extends Activity implements AdapterView.OnItemSelectedListener, View.OnKeyListener {
 
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
-
-    /**
-     * If set, will toggle the system UI visibility upon interaction. Otherwise,
-     * will show the system UI visibility upon interaction.
-     */
-    private static final boolean TOGGLE_ON_CLICK = true;
-
-    /**
-     * The flags to pass to {@link SystemUiHider#getInstance}.
-     */
-    private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
-
-    /**
-     * The instance of the {@link SystemUiHider} for this activity.
-     */
-    private SystemUiHider mSystemUiHider;
     private PitchContext pitchContext;
     private PitchContextFactory factory;
+    private DecimalFormat ogFormat = new DecimalFormat("#.000");
+    private PopupWindow help;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pitch_right);
+        init();
+        updateResults();
+
+
+    }
+
+    private void init() {
         initContext(getApplicationContext());
         initControls();
-
-
-
-        final View contentView = findViewById(R.id.frameLayout);
-
-
-        // Set up an instance of SystemUiHider to control the system UI for
-        // this activity.
-        mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
-        mSystemUiHider.setup();
-        mSystemUiHider
-                .setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
-                    // Cached values.
-                    int mControlsHeight;
-                    int mShortAnimTime;
-
-                    @Override
-                    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-                    public void onVisibilityChange(boolean visible) {
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-//                            // If the ViewPropertyAnimator API is available
-//                            // (Honeycomb MR2 and later), use it to animate the
-//                            // in-layout UI controls at the bottom of the
-//                            // screen.
-//                            if (mControlsHeight == 0) {
-//                                mControlsHeight = controlsView.getHeight();
-//                            }
-//                            if (mShortAnimTime == 0) {
-//                                mShortAnimTime = getResources().getInteger(
-//                                        android.R.integer.config_shortAnimTime);
-//                            }
-//                            controlsView.animate()
-//                                    .translationY(visible ? 0 : mControlsHeight)
-//                                    .setDuration(mShortAnimTime);
-//                        } else {
-//                            // If the ViewPropertyAnimator APIs aren't
-//                            // available, simply show or hide the in-layout UI
-//                            // controls.
-//                            controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
-//                        }
-
-                        if (visible && AUTO_HIDE) {
-                            // Schedule a hide().
-                            delayedHide(AUTO_HIDE_DELAY_MILLIS);
-                        }
-                    }
-                });
-
-        // Set up the user interaction to manually show or hide the system UI.
-        contentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TOGGLE_ON_CLICK) {
-                    mSystemUiHider.toggle();
-                } else {
-                    mSystemUiHider.show();
-                }
-            }
-        });
-
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-//        findViewById(R.id.targetPitchRateList).setOnTouchListener(mDelayHideTouchListener);
+        initHelp();
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-        delayedHide(100);
     }
 
-
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
-    View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (AUTO_HIDE) {
-                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-            }
-            return false;
-        }
-    };
-
-    Handler mHideHandler = new Handler();
-    Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            mSystemUiHider.hide();
-        }
-    };
-
-    /**
-     * Schedules a call to hide() in [delay] milliseconds, canceling any
-     * previously scheduled calls.
-     */
-    private void delayedHide(int delayMillis) {
-        mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
-    }
 
     private void initContext(Context andContext) {
         PropertyLoader propertyLoader = new PropertyLoader(andContext);
@@ -197,11 +81,57 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
         // Apply the adapter to the spinner
         pitchRate.setAdapter(staticAdapter);
         pitchRate.setOnItemSelectedListener(this);
+        //
+        EditText editText = (EditText) findViewById(R.id.pitchRate);
+        editText.setOnKeyListener(this);
+
+        EditText volume = (EditText) findViewById(R.id.batchVolumeEditText);
+        volume.setOnKeyListener(this);
+
+        Spinner volumeUnits = (Spinner) findViewById(R.id.batchVolumeSpinner);
+        staticAdapter = ArrayAdapter
+                .createFromResource(this, R.array.volumneUnits_items,
+                        android.R.layout.simple_spinner_item);
+        staticAdapter
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        volumeUnits.setAdapter(staticAdapter);
+        volumeUnits.setOnItemSelectedListener(this);
+
+        // init help
+
+
+    }
+
+    private void initHelp() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //Inflate the view from a predefined XML layout
+        View layout = inflater.inflate(R.layout.help_layout,
+                (ViewGroup) findViewById(R.id.helpElement));
+        // create a 300px width and 470px height PopupWindow
+        help = new PopupWindow(layout, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+
+        layout.findViewById(R.id.help_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismissHelp();
+            }
+        });
     }
 
     // performs pitch rate calculation using context
     private void updateResults() {
+        Wort wort = pitchContext.getWort();
+        String og = ogFormat.format(wort.getOriginalGravity());
 
+        ((EditText) findViewById(R.id.batchVolumeEditText)).setText(wort.getBatchVolume() + "");
+        ((EditText) findViewById(R.id.originalGravityEditText)).setText(og);
+
+        double yeastRequired = Calculator.calculateYeastRequired(wort.getTargetPitchRate(),
+                wort.getBatchVolume(),
+                wort.getOriginalGravity(),
+                wort.getCellOverbuild(),
+                wort.isGallons());
+        ((EditText) findViewById(R.id.requiredCellsEditText)).setText(yeastRequired + "");
     }
     // event handlers
 
@@ -209,6 +139,9 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
        switch  (parent.getId()) {
            case R.id.targetPitchRateSpinner: targetPitchRateChanged(parent);
+               break;
+           case R.id.batchVolumeSpinner:
+               volumneUnitsChanged(parent);
        }
     }
 
@@ -224,7 +157,7 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
             // show custom box and set value
             EditText v = (EditText)findViewById(R.id.pitchRate);
             v.setEnabled(true);
-            v.setSelected(true);
+            v.setSelection(v.getText().length());
             double val = getCustomPitchRate();
             pitchContext.getWort().setTargetPitchRate(val);
         } else {
@@ -237,7 +170,42 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
        updateResults();
     }
 
+    private void volumneUnitsChanged(View view) {
+        String valStr = (String) ((Spinner) view).getSelectedItem();
+        VolumeUnits type = VolumeUnits.valueOf(valStr.toUpperCase());
+        pitchContext.getWort().setUnits(type);
+        updateResults();
+    }
+
     private double getCustomPitchRate() {
-        return 0.8;
+        EditText v = (EditText) findViewById(R.id.pitchRate);
+        Editable edit = v.getText();
+        double val = Double.parseDouble(edit.toString());
+        return val;
+    }
+
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        return false;
+    }
+
+    public void showHelp(View view) {
+        String text = (String) view.getTag();
+        //    String[] textar = text.split("\\$");
+
+        View v = help.getContentView();
+        help.showAtLocation(findViewById(R.id.frameLayout), Gravity.CENTER, 0, 0);
+
+        TextView tv = (TextView) v.findViewById(R.id.helpText);
+        tv.setText(Html.fromHtml(text));
+//        tv = (TextView)v.findViewById(R.id.helpTitle);
+//        tv.setText(Html.fromHtml(textar[0]));
+//        Toast t = Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG);
+//        t.show();
+
+    }
+
+    public void dismissHelp() {
+        help.dismiss();
     }
 }

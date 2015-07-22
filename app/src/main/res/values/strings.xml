@@ -11,4 +11,20 @@
         <item>Hybrid</item>
         <item>Custom</item>
     </string-array>
+    <string name="wort_batchVolume">Batch Volume</string>
+    <string name="wort_originalGravity">Original Gravity</string>
+    <string-array name="volumneUnits_items">
+        <item>Gallons</item>
+        <item>Litres</item>
+    </string-array>
+    <string name="wort_cellsRequired">Yeast Cells Needed (billions)</string>
+
+    <!-- help -->
+    <string name="help_wort_targetPitchRate"><![CDATA[<h3>Target Pitch Rate</h3>The number of cells of yeast you will need depends on the type of beer you are brewing.<br/><br/>
+        Ales need around .75 million of cells yeast, per ml of wort, per degree plato.Lagers need double this amount (1.5 million cells per ml of wort, per degree plato), and hybrid beers are in the middle (1 million cells per ml of wort, per degree plato).<br/><br/>
+        Alternately, you may enter a custom pitch rate here.]]></string>
+    <string name="help_wort_batchVolume"><![CDATA[<h3>Batch Volume</h3>The amount of beer you are formating.]]></string>
+    <string name="help_wort_originalGravity"><![CDATA[<h3>Specific Gravity (SG)</h3>The specific gravity of your wort.  The higher this number, the more yeast cells you will need.]]></string>
+    <string name="help_wort_cellsRequired"><![CDATA[<h3>Yeast Cells Needed (Billions)</h3>The total number of cells that you need, based upon your type of fermentation (ale, lager, hybrid), your batch size, and your original gravity.<br><Br>If you elected to overbuild your starter in order to harvest some yeast for a future brew, those additional cells will be included in this number.]]></string>
+
 </resources>

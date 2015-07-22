@@ -8,8 +8,9 @@ public class Wort {
     private double batchVolume;
     private VolumeUnits units;
     private double OriginalGravity;
-    private int cellCount;
+    private int cellOverbuild;
     private int cellsRequired;
+
 
     public double getTargetPitchRate() {
         return targetPitchRate;
@@ -43,13 +44,14 @@ public class Wort {
         OriginalGravity = originalGravity;
     }
 
-    public int getCellCount() {
-        return cellCount;
+    public int getCellOverbuild() {
+        return cellOverbuild;
     }
 
-    public void setCellCount(int cellCount) {
-        this.cellCount = cellCount;
+    public void setCellOverbuild(int cellOverbuild) {
+        this.cellOverbuild = cellOverbuild;
     }
+
 
     public int getCellsRequired() {
         return cellsRequired;
@@ -58,4 +60,9 @@ public class Wort {
     public void setCellsRequired(int cellsRequired) {
         this.cellsRequired = cellsRequired;
     }
+
+    public boolean isGallons() {
+        return VolumeUnits.GALLONS.equals(units);
+    }
+
 }
