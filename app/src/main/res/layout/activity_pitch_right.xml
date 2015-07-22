@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="#0099cc"
+    android:orientation="vertical"
+    tools:context=".PitchRight"
+    android:id="@+id/frameLayout"
+    android:paddingTop="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:keepScreenOn="true"
+        android:id="@+id/mainLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/wort_targetPitchRate"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:id="@+id/textView" />
+
+        <Spinner
+            android:id="@+id/targetPitchRateSpinner"
+            android:layout_toRightOf="@+id/textView"
+           android:layout_alignTop="@+id/textView"
+            android:layout_height="fill_parent"
+            android:layout_width="96dp"
+            android:layout_marginRight="10dp"
+           />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="0.0"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:id="@+id/pitchRate" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></LinearLayout>
+
+    </LinearLayout>
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+
+</LinearLayout>
