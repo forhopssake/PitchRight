@@ -5,6 +5,7 @@ import com.forhopssake.pitchright.context.PitchContextFactory;
 import com.forhopssake.pitchright.context.TargetType;
 import com.forhopssake.pitchright.context.VolumeUnits;
 import com.forhopssake.pitchright.context.Wort;
+import com.forhopssake.pitchright.context.Yeast;
 import com.forhopssake.pitchright.res.PropertyLoader;
 import com.forhopssake.pitchright.util.Calculator;
 
@@ -92,7 +93,7 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
         pitchRate.setAdapter(staticAdapter);
         pitchRate.setOnItemSelectedListener(this);
         //
-        Wort wort = pitchContext.getWort();
+        final Wort wort = pitchContext.getWort();
         EditText editText = (EditText) findViewById(R.id.pitchRate);
         editText.setText(wort.getTargetPitchRate() + "");
         editText.addTextChangedListener(new TextWatcher() {
@@ -107,7 +108,7 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
             @Override
             public void afterTextChanged(Editable s) {
                 double d = Calculator.getDouble(s.toString());
-                pitchContext.getWort().setTargetPitchRate(d);
+                wort.setTargetPitchRate(d);
                 updateResults();
             }
         });
@@ -127,7 +128,7 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
             @Override
             public void afterTextChanged(Editable s) {
                 double d = Calculator.getDouble(s.toString());
-                pitchContext.getWort().setBatchVolume(d);
+                wort.setBatchVolume(d);
                 updateResults();
             }
         });
@@ -146,7 +147,7 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
             @Override
             public void afterTextChanged(Editable s) {
                 double d = Calculator.getDouble(s.toString());
-                pitchContext.getWort().setOriginalGravity(d);
+                wort.setOriginalGravity(d);
                 updateResults();
             }
         });
@@ -162,11 +163,53 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
         volumeUnits.setOnItemSelectedListener(this);
 
         // init Yeast
+        final Yeast yeast = pitchContext.getYeast();
+        EditText initialCells = (EditText) findViewById(R.id.initialCellCountEditText);
+        initialCells.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int i = Integer.parseInt(s.toString());
+                yeast.setIntialCellCount(i);
+                updateResults();
+            }
+        });
+
         EditText productionDate = (EditText) findViewById(R.id.productionDateEditText);
+        Date date = pitchContext.getYeast().getProductionDate();
+        productionDate.setText(getDateString(date));
 
+        setViability();
+        EditText viability = (EditText) findViewById(R.id.viabilityEditText);
+        viability.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        productionDate.setText(getDateString(pitchContext.getYeast().getProductionDate()));
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int via = Integer.parseInt(s.toString());
+                yeast.setViability(via);
+                updateResults();
+            }
+        });
+//        int via = Calculator.calculateYeastViability(date);
+//        viability.setText(via+"");
         // init help
 
 
@@ -197,11 +240,16 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
                 wort.getOriginalGravity(),
                 wort.getCellOverbuild(),
                 wort.isGallons());
-        ((EditText) findViewById(R.id.requiredCellsEditText)
+        ((EditText) findViewById(R.id.requiredCellsEditText)).setText(yeastRequired + "");
 
-        ).
 
-                setText(yeastRequired + "");
+        Yeast yeast = pitchContext.getYeast();
+        int viability = yeast.getViability();
+        int initialCells = yeast.getIntialCellCount();
+        double viableCellCount = (viability * initialCells) / 100;
+        yeast.setViableCellCount((int) Math.round(viableCellCount));
+        ((EditText) findViewById(R.id.viableCellCountEditText)).setText(yeast.getViableCellCount() + "");
+
     }
     // event handlers
 
@@ -296,6 +344,7 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
                         setDate(year, monthOfYear, dayOfMonth);
+                        setViability();
 
                     }
                 }, mYear, mMonth, mDay);
@@ -312,12 +361,17 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
             Date date = df.parse(dateStr);
             pitchContext.getYeast().setProductionDate(date);
             txtDate.setText(dateStr);
-            updateResults();
+
         } catch (ParseException e) {
             Log.e("Error setting date", e.toString());
         }
+    }
 
-
+    protected void setViability() {
+        Yeast yeast = pitchContext.getYeast();
+        int via = Calculator.calculateYeastViability(yeast.getProductionDate());
+        yeast.setViability(via);
+        ((EditText) findViewById(R.id.viabilityEditText)).setText(via + "");
     }
 
     private String getDateString(Date date) {
