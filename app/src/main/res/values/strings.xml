@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">PitchRight</string>
 
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-
+    <!-- wort -->
+    <string name="wort_title">Wort Details</string>
     <string name="wort_targetPitchRate">Target Pitch Rate:</string>
     <string-array name="targetPitchRate_items">
         <item>Ale</item>
@@ -11,13 +10,39 @@
         <item>Hybrid</item>
         <item>Custom</item>
     </string-array>
-    <string name="wort_batchVolume">Batch Volume</string>
-    <string name="wort_originalGravity">Original Gravity</string>
+    <string name="wort_batchVolume">Batch Volume:</string>
+    <string name="wort_originalGravity">Original Gravity:</string>
     <string-array name="volumneUnits_items">
         <item>Gallons</item>
         <item>Litres</item>
     </string-array>
-    <string name="wort_cellsRequired">Yeast Cells Needed (billions)</string>
+    <string name="wort_cellsRequired">Yeast Cells Needed (billions):</string>
+
+    <!-- yeast -->
+    <string name="yeast_title">Yeast Details</string>
+    <string name="yeast_initialCellCount">Initial Cell Count (billions):</string>
+    <string name="yeast_productionDate">Production Date:</string>
+    <string name="yeast_viability">Viability %:</string>
+    <string name="yeast_viableCellcount">Viable Cell Count (Billions):</string>
+
+    <!-- starter -->
+    <string name="starter_title">Starter Details</string>
+    <string name="starter_flaskSize">Flask Size (Litres):</string>
+    <string name="starter_gravity">Gravity:</string>
+    <string name="starter_volume">Volume (Litres):</string>
+    <string name="starter_dmeAmount">DME Needed (grams):</string>
+
+    <!-- starter steps -->
+    <string name="starter_step_first">1st Starter Step</string>
+    <string name="starter_step_second">2nd Starter Step</string>
+    <string name="starter_step_third">3rd Starter Step</string>
+    <string name="starter_step_fourth">4th Starter Step</string>
+    <string name="starter_step_aerationMethod">Method of Aeration:</string>
+    <string name="starter_step_starterVolume">Starter Volume (Litres):</string>
+    <string name="starter_step_inoculationRate">Inoculation Rate (millions/ml):</string>
+    <string name="starter_step_cellsCreated">New Cells Created (billions):</string>
+    <string name="starter_step_totalCells">Total Cells:</string>
+    <string name="starter_step_growthFactor">Growth Factor:</string>
 
     <!-- help -->
     <string name="help_wort_targetPitchRate"><![CDATA[<h3>Target Pitch Rate</h3>The number of cells of yeast you will need depends on the type of beer you are brewing.<br/><br/>
@@ -26,5 +51,10 @@
     <string name="help_wort_batchVolume"><![CDATA[<h3>Batch Volume</h3>The amount of beer you are formating.]]></string>
     <string name="help_wort_originalGravity"><![CDATA[<h3>Specific Gravity (SG)</h3>The specific gravity of your wort.  The higher this number, the more yeast cells you will need.]]></string>
     <string name="help_wort_cellsRequired"><![CDATA[<h3>Yeast Cells Needed (Billions)</h3>The total number of cells that you need, based upon your type of fermentation (ale, lager, hybrid), your batch size, and your original gravity.<br><Br>If you elected to overbuild your starter in order to harvest some yeast for a future brew, those additional cells will be included in this number.]]></string>
+
+    <string name="help_yeast_initialCellCount"><![CDATA[<h3>Initial Cell Count (Billions)</h3>TODO.]]></string>
+    <string name="help_yeast_productionDate"><![CDATA[<h3>Production Date</h3>TODO.]]></string>
+    <string name="help_yeast_viability"><![CDATA[<h3>Viability</h3>TODO.]]></string>
+    <string name="help_yeast_viableCellCount"><![CDATA[<h3>Viabile Cell Count (Billions)</h3>TODO.]]></string>
 
 </resources>

@@ -9,10 +9,14 @@ import com.forhopssake.pitchright.res.PropertyLoader;
 import com.forhopssake.pitchright.util.Calculator;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,13 +24,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 
 
@@ -82,11 +92,65 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
         pitchRate.setAdapter(staticAdapter);
         pitchRate.setOnItemSelectedListener(this);
         //
+        Wort wort = pitchContext.getWort();
         EditText editText = (EditText) findViewById(R.id.pitchRate);
-        editText.setOnKeyListener(this);
+        editText.setText(wort.getTargetPitchRate() + "");
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                double d = Calculator.getDouble(s.toString());
+                pitchContext.getWort().setTargetPitchRate(d);
+                updateResults();
+            }
+        });
+
 
         EditText volume = (EditText) findViewById(R.id.batchVolumeEditText);
-        volume.setOnKeyListener(this);
+        volume.setText(wort.getBatchVolume() + "");
+        volume.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                double d = Calculator.getDouble(s.toString());
+                pitchContext.getWort().setBatchVolume(d);
+                updateResults();
+            }
+        });
+
+        EditText og = (EditText) findViewById(R.id.originalGravityEditText);
+        og.setText(wort.getOriginalGravity() + "");
+        og.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                double d = Calculator.getDouble(s.toString());
+                pitchContext.getWort().setOriginalGravity(d);
+                updateResults();
+            }
+        });
+
 
         Spinner volumeUnits = (Spinner) findViewById(R.id.batchVolumeSpinner);
         staticAdapter = ArrayAdapter
@@ -96,6 +160,12 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         volumeUnits.setAdapter(staticAdapter);
         volumeUnits.setOnItemSelectedListener(this);
+
+        // init Yeast
+        EditText productionDate = (EditText) findViewById(R.id.productionDateEditText);
+
+
+        productionDate.setText(getDateString(pitchContext.getYeast().getProductionDate()));
 
         // init help
 
@@ -121,17 +191,17 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
     // performs pitch rate calculation using context
     private void updateResults() {
         Wort wort = pitchContext.getWort();
-        String og = ogFormat.format(wort.getOriginalGravity());
-
-        ((EditText) findViewById(R.id.batchVolumeEditText)).setText(wort.getBatchVolume() + "");
-        ((EditText) findViewById(R.id.originalGravityEditText)).setText(og);
 
         double yeastRequired = Calculator.calculateYeastRequired(wort.getTargetPitchRate(),
                 wort.getBatchVolume(),
                 wort.getOriginalGravity(),
                 wort.getCellOverbuild(),
                 wort.isGallons());
-        ((EditText) findViewById(R.id.requiredCellsEditText)).setText(yeastRequired + "");
+        ((EditText) findViewById(R.id.requiredCellsEditText)
+
+        ).
+
+                setText(yeastRequired + "");
     }
     // event handlers
 
@@ -184,10 +254,7 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
         return val;
     }
 
-    @Override
-    public boolean onKey(View v, int keyCode, KeyEvent event) {
-        return false;
-    }
+
 
     public void showHelp(View view) {
         String text = (String) view.getTag();
@@ -208,4 +275,59 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
     public void dismissHelp() {
         help.dismiss();
     }
+
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        return false;
+    }
+
+    public void showDatePicker(View view) {
+        final Calendar c = Calendar.getInstance();
+        c.setTime(pitchContext.getYeast().getProductionDate());
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog dpd = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        setDate(year, monthOfYear, dayOfMonth);
+
+                    }
+                }, mYear, mMonth, mDay);
+        dpd.show();
+
+    }
+
+    protected void setDate(int year, int month, int day) {
+        final EditText txtDate = (EditText) findViewById(R.id.productionDateEditText);
+        String dateStr = day + "/"
+                + (month + 1) + "/" + year;
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date = df.parse(dateStr);
+            pitchContext.getYeast().setProductionDate(date);
+            txtDate.setText(dateStr);
+            updateResults();
+        } catch (ParseException e) {
+            Log.e("Error setting date", e.toString());
+        }
+
+
+    }
+
+    private String getDateString(Date date) {
+        final Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int year = c.get(Calendar.YEAR);
+        int monthOfYear = c.get(Calendar.MONTH);
+        int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+        return dayOfMonth + "/"
+                + (monthOfYear + 1) + "/" + year;
+    }
+
 }

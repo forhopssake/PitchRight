@@ -16,154 +16,323 @@
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:keepScreenOn="true"
-        android:id="@+id/targetPitchRateRLayout">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/wort_targetPitchRate"
-            android:layout_alignParentTop="true"
-            android:gravity="center"
-            android:onClick="showHelp"
-            android:tag="@string/help_wort_targetPitchRate"
-            android:id="@+id/targetPitchRateTextView" />
+            <TextView
+                android:id="@+id/wort_header_title"
+                android:text="@string/wort_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dip"
+                android:paddingBottom="2dip"
+                android:paddingLeft="5dip"
+                style="?android:attr/listSeparatorTextViewStyle" />
 
-        <Spinner
-            android:id="@+id/targetPitchRateSpinner"
-            android:layout_toRightOf="@+id/textView"
-           android:layout_alignTop="@+id/textView"
-            android:layout_height="fill_parent"
-            android:layout_width="96dp"
-            android:layout_marginRight="10dp"
-           />
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:inputType="number"
-            android:text="0.0"
-            android:layout_alignParentTop="true"
-            android:gravity="center"
-            android:id="@+id/pitchRate" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true"
+                android:id="@+id/targetPitchRateRLayout">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"></LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/wort_targetPitchRate"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_wort_targetPitchRate"
+                    android:id="@+id/targetPitchRateTextView" />
+
+                <Spinner
+                    android:id="@+id/targetPitchRateSpinner"
+                    android:layout_toRightOf="@+id/textView"
+                    android:layout_alignTop="@+id/textView"
+                    android:layout_height="fill_parent"
+                    android:layout_width="96dp"
+                    android:layout_marginRight="10dp" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="number"
+                    android:text="0.0"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:id="@+id/pitchRate" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"></LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true"
+                android:id="@+id/targetPRLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/wort_batchVolume"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_wort_batchVolume"
+                    android:id="@+id/batchVolumeTextView" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="numberDecimal"
+                    android:text="0.0"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:id="@+id/batchVolumeEditText" />
+
+                <Spinner
+                    android:id="@+id/batchVolumeSpinner"
+                    android:layout_height="fill_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true"
+                android:id="@+id/originalGravityLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/wort_originalGravity"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_wort_originalGravity"
+                    android:id="@+id/originalGravityTextView" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="numberDecimal"
+                    android:text="0.0"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:id="@+id/originalGravityEditText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/wort_cellsRequired"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_wort_cellsRequired" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="numberDecimal"
+                    android:text="0"
+                    android:textColor="#ffff7216"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="false"
+                    android:id="@+id/requiredCellsEditText" />
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"></LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:keepScreenOn="true"
-            android:id="@+id/targetPRLayout">
-
+            android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/wort_batchVolume"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:enabled="true"
-                android:onClick="showHelp"
-                android:tag="@string/help_wort_batchVolume"
-                android:id="@+id/batchVolumeTextView" />
+                android:id="@+id/yeast_header_title"
+                android:text="@string/yeast_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dip"
+                android:paddingBottom="2dip"
+                android:paddingLeft="5dip"
+                style="?android:attr/listSeparatorTextViewStyle" />
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:inputType="numberDecimal"
-                android:text="0.0"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:id="@+id/batchVolumeEditText" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true">
 
-            <Spinner
-                android:id="@+id/batchVolumeSpinner"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:layout_marginRight="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/yeast_initialCellCount"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_yeast_initialCellCount" />
 
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="numberDecimal"
+                    android:text="100"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:id="@+id/initialCellCountEditText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/yeast_productionDate"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_yeast_productionDate" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="date"
+                    android:text="23/07/2015"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:onClick="showDatePicker"
+                    android:id="@+id/productionDateEditText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/yeast_viability"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_yeast_viability" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="numberDecimal"
+                    android:text="100"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:id="@+id/viabilityEditText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/yeast_viableCellcount"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_yeast_viableCellCount" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="numberDecimal"
+                    android:text="0"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:id="@+id/viableCellCountEditText" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:keepScreenOn="true"
-            android:id="@+id/originalGravityLayout">
-
+            android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/wort_originalGravity"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:enabled="true"
-                android:onClick="showHelp"
-                android:tag="@string/help_wort_originalGravity"
-                android:id="@+id/originalGravityTextView" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:inputType="numberDecimal"
-                android:text="0.0"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:id="@+id/originalGravityEditText" />
-
+                android:id="@+id/starter_header_title"
+                android:text="@string/starter_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dip"
+                android:paddingBottom="2dip"
+                android:paddingLeft="5dip"
+                style="?android:attr/listSeparatorTextViewStyle" />
         </LinearLayout>
+    </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:keepScreenOn="true"
-            android:background="#ffff7216">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/wort_cellsRequired"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:enabled="true"
-                android:onClick="showHelp"
-                android:tag="@string/help_wort_cellsRequired" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:inputType="numberDecimal"
-                android:text="0"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:enabled="false"
-                android:id="@+id/requiredCellsEditText" />
-        </LinearLayout>
-
-        <!-- This FrameLayout insets its children based on system windows using
-             android:fitsSystemWindows. -->
-
-</LinearLayout>
 </FrameLayout>
