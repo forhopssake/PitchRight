@@ -3,6 +3,7 @@ package com.forhopssake.pitchright;
 import com.forhopssake.pitchright.context.PitchContext;
 import com.forhopssake.pitchright.context.PitchContextFactory;
 import com.forhopssake.pitchright.context.Starter;
+import com.forhopssake.pitchright.context.StarterStep;
 import com.forhopssake.pitchright.context.TargetType;
 import com.forhopssake.pitchright.context.VolumeUnits;
 import com.forhopssake.pitchright.context.Wort;
@@ -221,6 +222,13 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
         final Spinner flaskSize = (Spinner) findViewById(R.id.flaskSizeSpinner);
         flaskSize.setOnItemSelectedListener(this);
         flaskSize.setSelection(3);
+
+        StarterStep s1 = new StarterStep();
+        starter.getStarterSteps().add(s1);
+        final Spinner aerationMethod = (Spinner) findViewById(R.id.aerationMethodSpinner);
+        flaskSize.setOnItemSelectedListener(this);
+        flaskSize.setSelection(0);
+
     }
 
     private void initHelp() {
@@ -257,6 +265,13 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
         double viableCellCount = (viability * initialCells) / 100;
         yeast.setViableCellCount((int) Math.round(viableCellCount));
         ((EditText) findViewById(R.id.viableCellCountEditText)).setText(yeast.getViableCellCount() + "");
+
+        Starter starter = pitchContext.getStarter();
+        double starterGravity = starter.getStartingGravity();
+
+
+        // starter steps
+
 
     }
     // event handlers
