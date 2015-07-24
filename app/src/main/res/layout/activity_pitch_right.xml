@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="#0099cc"
     android:orientation="vertical"
@@ -334,7 +334,144 @@
                 android:paddingBottom="2dip"
                 android:paddingLeft="5dip"
                 style="?android:attr/listSeparatorTextViewStyle" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/starter_flaskSize"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_starter_flaskSize" />
+
+                <Spinner
+                    android:id="@+id/flaskSizeSpinner"
+                    android:entries="@array/starter_flaskSize_labels"
+                    android:layout_height="fill_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/starter_gravity"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_starter_gravity" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="number"
+                    android:text="1.037"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:id="@+id/starterGravityEditText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/starter_volume"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_starter_volume" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="number"
+                    android:text="0"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:id="@+id/starterVolumeEditText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:keepScreenOn="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/starter_dmeAmount"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:onClick="showHelp"
+                    android:tag="@string/help_starter_dmeNeededy" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="number"
+                    android:text="0"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:id="@+id/dmeNeededEditText" />
+            </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/starterSteps_header_title"
+                android:text="@string/starter_steps_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dip"
+                android:paddingBottom="2dip"
+                android:paddingLeft="5dip"
+                style="?android:attr/listSeparatorTextViewStyle" />
+
+            <include layout="@layout/starter_step_layout" />
     </LinearLayout>
 
-</FrameLayout>
+    </LinearLayout>
+
+</ScrollView>

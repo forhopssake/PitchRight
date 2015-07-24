@@ -2,6 +2,7 @@ package com.forhopssake.pitchright;
 
 import com.forhopssake.pitchright.context.PitchContext;
 import com.forhopssake.pitchright.context.PitchContextFactory;
+import com.forhopssake.pitchright.context.Starter;
 import com.forhopssake.pitchright.context.TargetType;
 import com.forhopssake.pitchright.context.VolumeUnits;
 import com.forhopssake.pitchright.context.Wort;
@@ -208,11 +209,18 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
                 updateResults();
             }
         });
-//        int via = Calculator.calculateYeastViability(date);
-//        viability.setText(via+"");
+
+        initStarter();
         // init help
 
 
+    }
+
+    protected void initStarter() {
+        Starter starter = pitchContext.getStarter();
+        final Spinner flaskSize = (Spinner) findViewById(R.id.flaskSizeSpinner);
+        flaskSize.setOnItemSelectedListener(this);
+        flaskSize.setSelection(3);
     }
 
     private void initHelp() {
@@ -260,6 +268,10 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
                break;
            case R.id.batchVolumeSpinner:
                volumneUnitsChanged(parent);
+               break;
+           case R.id.flaskSizeSpinner:
+               flaskSizeChanged(parent);
+               break;
        }
     }
 
@@ -292,6 +304,14 @@ public class PitchRight extends Activity implements AdapterView.OnItemSelectedLi
         String valStr = (String) ((Spinner) view).getSelectedItem();
         VolumeUnits type = VolumeUnits.valueOf(valStr.toUpperCase());
         pitchContext.getWort().setUnits(type);
+        updateResults();
+    }
+
+    private void flaskSizeChanged(View view) {
+        Spinner flaskSpinner = (Spinner) view;
+        String selectedVal = getResources().getStringArray(R.array.starter_flaskSize_values)[flaskSpinner.getSelectedItemPosition()];
+        double size = Double.parseDouble(selectedVal);
+        pitchContext.getStarter().setFlaskSize(size);
         updateResults();
     }
 

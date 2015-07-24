@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/starterSteps_header_title"
+            android:text="1st starter step"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dip"
+            android:paddingBottom="2dip"
+            android:paddingLeft="5dip"
+            style="?android:attr/listSeparatorTextViewStyle" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:keepScreenOn="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/starter_step_aerationMethod"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:onClick="showHelp"
+                android:tag="TODO" />
+
+            <Spinner
+                android:id="@+id/aerationMethodSpinner"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:entries="@array/starter_step_aearation_labels" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:keepScreenOn="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/starter_step_starterVolume"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:enabled="true"
+                android:onClick="showHelp"
+                android:tag="TODO" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:inputType="number"
+                android:text="2"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:focusable="false"
+                android:id="@+id/starterVolumeEditText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:keepScreenOn="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/starter_step_inoculationRate"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:enabled="true"
+                android:onClick="showHelp"
+                android:tag="TODO" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:inputType="number"
+                android:text="1.037"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:focusable="false"
+                android:id="@+id/inoculationRateEditText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:keepScreenOn="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/starter_step_cellsCreated"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:enabled="true"
+                android:onClick="showHelp"
+                android:tag="@string/help_starter_gravity" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:inputType="number"
+                android:text="0"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:focusable="false"
+                android:id="@+id/cellsCreatedEditText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:keepScreenOn="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/starter_step_totalCells"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:enabled="true"
+                android:onClick="showHelp"
+                android:tag="TODO" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:inputType="number"
+                android:text="0"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:focusable="false"
+                android:id="@+id/totalCellsEditText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:keepScreenOn="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/starter_step_growthFactor"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:enabled="true"
+                android:onClick="showHelp"
+                android:tag="TODO" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:inputType="number"
+                android:text="0"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:focusable="false"
+                android:id="@+id/growthFactorEditText" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

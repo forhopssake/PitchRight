@@ -27,17 +27,56 @@
 
     <!-- starter -->
     <string name="starter_title">Starter Details</string>
-    <string name="starter_flaskSize">Flask Size (Litres):</string>
+    <string name="starter_flaskSize">Flask Size:</string>
+    <string-array name="starter_flaskSize_labels">
+        <item>500 ml</item>
+        <item>1 Litre</item>
+        <item>1.5 Litres</item>
+        <item>2 Litres</item>
+        <item>2.5 Litres</item>
+        <item>3 Litres</item>
+        <item>3.5 Litres</item>
+        <item>4 Litres</item>
+        <item>5.5 Litres</item>
+        <item>5 Litres</item>
+        <item>Custom</item>
+    </string-array>
+    <string-array name="starter_flaskSize_values">
+        <item>.5</item>
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+        <item>2.5</item>
+        <item>3</item>
+        <item>3.5</item>
+        <item>4</item>
+        <item>4.5</item>
+        <item>5</item>
+        <item>0</item>
+    </string-array>
     <string name="starter_gravity">Gravity:</string>
     <string name="starter_volume">Volume (Litres):</string>
     <string name="starter_dmeAmount">DME Needed (grams):</string>
 
     <!-- starter steps -->
-    <string name="starter_step_first">1st Starter Step</string>
-    <string name="starter_step_second">2nd Starter Step</string>
-    <string name="starter_step_third">3rd Starter Step</string>
-    <string name="starter_step_fourth">4th Starter Step</string>
-    <string name="starter_step_aerationMethod">Method of Aeration:</string>
+    <string name="starter_steps_title">Starter Steps</string>
+    <string-array name="starter_step_steps">
+        <item>1st Starter Step</item>
+        <item>2nd Starter Step</item>
+        <item>3rd Starter Step</item>
+        <item>4th Starter Step</item>
+    </string-array>
+    <string name="starter_step_aerationMethod">Aeration Method:</string>
+    <string-array name="starter_step_aearation_labels">
+        <item>Stir Plate</item>
+        <item>Manualy Shaken</item>
+        <item>Simple (No Aeration)</item>
+    </string-array>
+    <string-array name="starter_step_aearation_values">
+        <item>STIRPLATE</item>
+        <item>MANUAL</item>
+        <item>SIMPLE</item>
+    </string-array>
     <string name="starter_step_starterVolume">Starter Volume (Litres):</string>
     <string name="starter_step_inoculationRate">Inoculation Rate (millions/ml):</string>
     <string name="starter_step_cellsCreated">New Cells Created (billions):</string>
@@ -56,5 +95,10 @@
     <string name="help_yeast_productionDate"><![CDATA[<h3>Production Date</h3>TODO.]]></string>
     <string name="help_yeast_viability"><![CDATA[<h3>Viability</h3>TODO.]]></string>
     <string name="help_yeast_viableCellCount"><![CDATA[<h3>Viabile Cell Count (Billions)</h3>TODO.]]></string>
+
+    <string name="help_starter_flaskSize"><![CDATA[<h3>Flask Size (Litres)</h3>TODO.]]></string>
+    <string name="help_starter_gravity"><![CDATA[<h3>Gravity</h3>TODO.]]></string>
+    <string name="help_starter_volume"><![CDATA[<h3>Volume (Litres)</h3>TODO.]]></string>
+    <string name="help_starter_dmeNeededy"><![CDATA[<h3>DME Needed (grams)</h3>TODO.]]></string>
 
 </resources>
